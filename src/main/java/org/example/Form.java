@@ -1,23 +1,23 @@
 package org.example;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Form implements Serializable {
     private String name;
-    private int phone;
+    private String phone;
     private String university;
     private String specialization;
     private String stage;
     private int course;
     private int hours;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
+    private String petProjects;
+    private String ideas;
+    private String skills;
 
-    public Form() {
-    }
 
-    public Form(String name, int phone, String university, String specialization, String stage, int course, int hours, Date startDate, Date endDate) {
+    public Form(String name, String phone, String university, String specialization, String stage, int course, int hours, String startDate, String endDate, String petProjects, String ideas, String skills) {
         this.name = name;
         this.phone = phone;
         this.university = university;
@@ -27,92 +27,73 @@ public class Form implements Serializable {
         this.hours = hours;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.petProjects = petProjects;
+        this.ideas = ideas;
+        this.skills = skills;
     }
 
     @Override
     public String toString() {
-        return "Form{" +
-                "name='" + name + '\'' +
-                ", phone=" + phone +
-                ", university='" + university + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", stage='" + stage + '\'' +
-                ", course=" + course +
-                ", hours=" + hours +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
+        return "Анкета:" + "\r\n" +
+                "Имя: " + getName() + "\r\n" +
+                "Телефон: " + getPhone() + "\r\n" +
+                "Из учебного заведения: " + getUniversity() + "\r\n" +
+                "Со специализацией: " + getSpecialization() + "\r\n" +
+                "Со ступенью образования: " + getStage() + "\r\n" +
+                "Курс обучения: " + getCourse() + "\r\n" +
+                "Готов посветить практике " + getHours() + " часов в день" + "\r\n" +
+                "Желает приступить " + getStartDate() +
+                " и закончить " + getEndDate() + "\r\n" +
+                "Пет проекты: " + getPetProjects() + "\r\n" +
+                "Идеи: " + getIdeas() + "\r\n" +
+                "Навыки: " + getSkills();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPhone() {
+    public String getPhone() {
         return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
     }
 
     public String getUniversity() {
         return university;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
     public String getSpecialization() {
         return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
     }
 
     public String getStage() {
         return stage;
     }
 
-    public void setStage(String stage) {
-        this.stage = stage;
-    }
-
     public int getCourse() {
         return course;
-    }
-
-    public void setCourse(int course) {
-        this.course = course;
     }
 
     public int getHours() {
         return hours;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
-
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public String getPetProjects() {
+        return petProjects;
+    }
+
+    public String getIdeas() {
+        return ideas;
+    }
+
+    public String getSkills() {
+        return skills;
     }
 }

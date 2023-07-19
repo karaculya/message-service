@@ -13,39 +13,36 @@ public class MailSender {
     private static String username;
     private static String password;
 
-    static {
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-    }
-
     public MailSender() {
-        username = getProperties().getProperty("username");
-        password = getProperties().getProperty("password");
+        username = getProperties().getProperty("mail.from");
+        password = getProperties().getProperty("mail.from.password");
     }
 
     public void send() {
         Session session = Session.getInstance(
-                properties,
+                getProperties(),
                 new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                        return new PasswordAuthentication(getUsername(), getPassword());
                     }
                 }
         );
 
+        sendMsg(session);
+    }
+
+    private void sendMsg(Session session){
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress(getUsername()));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(
-                            getProperties().getProperty("fromUser")
+                            getProperties().getProperty("mail.to")
                     )
             );
-            message.setSubject("Новый кандидат");
+            message.setSubject("practicat");
             message.setText(GsonParser.parse().toString());
 
             Transport.send(message);
@@ -56,14 +53,20 @@ public class MailSender {
     }
 
     private Properties getProperties() {
-        Properties secretProperties = new Properties();
-
         try (FileInputStream inputStream = new FileInputStream(fileName)) {
-            secretProperties.load(inputStream);
+            properties.load(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return secretProperties;
+        return properties;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static String getPassword() {
+        return password;
     }
 }
